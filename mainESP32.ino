@@ -12,10 +12,7 @@ AutoUpdatePayload payload;
 unsigned long lastUpdateTime = 0;
 const unsigned long updateInterval = 500;
 
-// ------- GPIO ESP32 (adapter si besoin) --------
-const int smokeSensorPin = 34;   // Exemple : entrée analogique (ESP32 a plusieurs ADC)
 
-bool smokeAlert = false;
 
 void setup() {
   Serial.begin(115200);
@@ -33,7 +30,7 @@ void Autoupdate() {
   processCommandIfNeeded(lastCommand, payload);
 
   if (millis() - lastUpdateTime > updateInterval) {
-    detect();
+  
 
     sendAutoUpdate(payload);
     payload.notif = "false";
@@ -42,11 +39,13 @@ void Autoupdate() {
     lastUpdateTime = millis();
   }
 }
+/* 
 
-void detect() {
-  int rawValue = analogRead(smokeSensorPin);  
-  float normalized = rawValue / 4095.0;   // ESP32 ADC = 12 bits (0-4095)
-  
-  payload.indicateur1 = normalized;
-  payload.ecran1 = String(rawValue);
-}
+Au  cas où , Voici la liste des noms à chercher dans le Library Manager :
+ESP32 by Espressif Systems (Board package → inclut WiFi.h, HTTPClient.h, WiFiClientSecure.h)
+
+AsyncTCP
+
+ESP Async WebServer
+
+ArduinoJson  */
