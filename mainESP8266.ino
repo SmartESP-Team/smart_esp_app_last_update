@@ -1,4 +1,4 @@
-#include "SmartESP8266Utils.h"
+#include <SmartESP8266Utils.h>
 #include <ESP8266WiFi.h>
 #include <ESPAsyncTCP.h>
 #include <ESPAsyncWebServer.h>
@@ -35,7 +35,7 @@ void Autoupdate() {
   processCommandIfNeeded(lastCommand, payload);
 
   if (millis() - lastUpdateTime > updateInterval) {
-    detect();
+ 
 
     sendAutoUpdate(payload);
     payload.notif = "false";
@@ -46,12 +46,17 @@ void Autoupdate() {
 }
 
 
-void detect(){
-  
-   int yann = analogRead(A0);
-   float i = yann/ 1024.0 ;
-  payload.indicateur1 = i ;
-  payload.ecran1 = yann ;
+/* 
+
+Au  cas où , Voici la liste des noms à chercher dans le Library Manager :
+
+ESP8266 by ESP8266 Community (Board package → inclut ESP8266WiFi, ESP8266HTTPClient, BearSSL)
+
+ESPAsyncTCP
+
+ESP Async WebServer
+
+ArduinoJson
 
 
-}
+*/
